@@ -1,0 +1,11 @@
+{
+  "name": "monurl",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:hron/monurl.git",
+  "author": "Aleksei Gusev <aleksei.gusev@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^25.2.2"
+  }
+}
