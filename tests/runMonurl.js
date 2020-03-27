@@ -1,7 +1,7 @@
-import * as path from 'path'
-import {Writable} from 'stream'
-import execa from 'execa'
-import stripAnsi from 'strip-ansi'
+const path = require('path')
+const {Writable} = require('stream')
+const execa = require('execa')
+const stripAnsi = require('strip-ansi')
 
 const MONURL_PATH = path.resolve(__dirname, '..', 'bin', 'monurl')
 
@@ -36,7 +36,7 @@ function normalizeStdoutAndStderr(result, options) {
   return result;
 }
 
-export default function runMonurl(dir, args, options = {}) {
+function runMonurl(dir, args, options = {}) {
   const monurlPromise = spawnMonurl(dir, args, {timeout: 30000, ...options}, true)
 
   let stderr = ''
@@ -102,3 +102,5 @@ export default function runMonurl(dir, args, options = {}) {
     },
   }
 }
+
+module.exports = runMonurl

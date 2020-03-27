@@ -1,4 +1,4 @@
-import runMonurl from './runMonurl'
+const runMonurl = require('./runMonurl')
 
 test('starts checks and logs progress', async () => {
   const monurlRun = runMonurl('..')

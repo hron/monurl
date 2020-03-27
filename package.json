@@ -9,10 +9,8 @@
     "test": "jest --watchAll"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.9.0",
-    "babel-jest": "^25.2.3",
-    "jest": "^25.2.2",
     "execa": "latest",
+    "jest": "^25.2.2",
     "strip-ansi": "latest"
   },
   "dependencies": {
