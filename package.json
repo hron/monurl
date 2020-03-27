@@ -5,6 +5,9 @@
   "repository": "git@github.com:hron/monurl.git",
   "author": "Aleksei Gusev <aleksei.gusev@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
   "devDependencies": {
     "@babel/preset-env": "^7.9.0",
     "babel-jest": "^25.2.3",
