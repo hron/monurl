@@ -6,6 +6,11 @@
   "author": "Aleksei Gusev <aleksei.gusev@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@babel/preset-env": "^7.9.0",
+    "babel-jest": "^25.2.3",
     "jest": "^25.2.2"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
   }
 }
