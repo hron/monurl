@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const {runMonurlSync, writeMonurlConfig} = require('./runMonurl')
 
-it('starts checks and logs progress', async () => {
+it('starts checks and logs progress', () => {
   const configPath = writeMonurlConfig({
     sites: [
       {
