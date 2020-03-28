@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-class ContainsTextChecker {
+class ContainsTextCheck {
   constructor(url, options) {
     this._url = url
     this._text = options.text
@@ -28,4 +28,4 @@ class ContainsTextChecker {
   }
 }
 
-module.exports = ContainsTextChecker
+module.exports = ContainsTextCheck

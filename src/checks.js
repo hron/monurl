@@ -1,13 +1,13 @@
-const ContainsTextChecker = require('./checks/ContainsTextChecker')
-const ChecksumChecker = require('./checks/ChecksumChecker')
+const ContainsTextCheck = require('./checks/ContainsTextCheck')
+const ChecksumCheck = require('./checks/ChecksumCheck')
 
 const buildCheck = (type, url, options) => {
   if (type === 'containsText') {
-    return new ContainsTextChecker(url, options)
+    return new ContainsTextCheck(url, options)
   } else if (type === 'matchesChecksum') {
-    return new ChecksumChecker(url, options)
+    return new ChecksumCheck(url, options)
   } else {
-    throw new Error(`Invalid checker type: ${type}`)
+    throw new Error(`Invalid check type: ${type}`)
   }
 }
 
