@@ -36,8 +36,8 @@ class TextLogReporter {
       'Check for %s (%s) finished. Result: %s; %s',
       checkResult.site.url,
       humanizedCheckType[checkResult.site.type],
-      checkResult.success ? 'OK' : 'FAIL',
-      checkResult.additional
+      checkResult.success ? 'OK' : checkResult.transportSuccess ? 'FAIL' : 'DOWN',
+      checkResult.transportSuccess ? `${checkResult.duration} ms` : 'N/A'
     )
   }
 }

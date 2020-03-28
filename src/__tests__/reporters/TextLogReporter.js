@@ -34,18 +34,51 @@ describe('process(checkStarted, payload)', () => {
     expect(loggerMock.info).toHaveBeenCalledWith('Check for https://example.com (match text on page) started')
   })
 
-  it('reports a check finish', () => {
+  it('reports a successful check finish', () => {
     reporter.process(
       'checkFinished',
       {
         site: {url: 'https://example.com', type: 'containsText', options: {text: 'Test'}},
         success: true,
-        additional: '253 ms'
+        transportSuccess: true,
+        duration: 253
       }
     )
 
     expect(loggerMock.info).toHaveBeenCalledWith(
       'Check for https://example.com (match text on page) finished. Result: OK; 253 ms'
+    )
+  })
+
+  it('reports a transport failure', () => {
+    reporter.process(
+      'checkFinished',
+      {
+        site: {url: 'https://example.com', type: 'containsText', options: {text: 'Test'}},
+        success: false,
+        transportSuccess: false,
+        duration: undefined
+      }
+    )
+
+    expect(loggerMock.info).toHaveBeenCalledWith(
+      'Check for https://example.com (match text on page) finished. Result: DOWN; N/A'
+    )
+  })
+
+  it('reports a failed check finish', () => {
+    reporter.process(
+      'checkFinished',
+      {
+        site: {url: 'https://example.com', type: 'containsText', options: {text: 'Test'}},
+        success: false,
+        transportSuccess: true,
+        duration: 500
+      }
+    )
+
+    expect(loggerMock.info).toHaveBeenCalledWith(
+      'Check for https://example.com (match text on page) finished. Result: FAIL; 500 ms'
     )
   })
 })

@@ -11,7 +11,8 @@ class ContainsTextChecker {
     return Promise.resolve({
       site: {url: this._url, type: 'containsText'},
       success: true,
-      additional: '253 ms'
+      transportSuccess: true,
+      duration: 253
     })
   }
 }
