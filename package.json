@@ -12,7 +12,8 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "src/__tests__/runMonurl.js"
-    ]
+    ],
+    "testEnvironment": "node"
   },
   "devDependencies": {
     "@types/jest": "^25.1.4",
