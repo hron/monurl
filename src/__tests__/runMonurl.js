@@ -3,7 +3,7 @@ const {Writable} = require('stream')
 const execa = require('execa')
 const stripAnsi = require('strip-ansi')
 
-const MONURL_PATH = path.resolve(__dirname, '..', 'bin', 'monurl')
+const MONURL_PATH = path.resolve(__dirname, '..', '..', 'bin', 'monurl')
 
 function spawnMonurl(dir, args, options, spawnAsync) {
   const isRelative = !path.isAbsolute(dir)
@@ -34,6 +34,10 @@ function normalizeStdoutAndStderr(result, options) {
   if (options.stripAnsi) result.stderr = stripAnsi(result.stderr);
 
   return result;
+}
+
+function runMonurlSync(dir, args, options = {}) {
+  return normalizeStdoutAndStderr(spawnMonurl(dir, args, options), options)
 }
 
 function runMonurl(dir, args, options = {}) {
@@ -103,4 +107,7 @@ function runMonurl(dir, args, options = {}) {
   }
 }
 
-module.exports = runMonurl
+module.exports = {
+  runMonurl,
+  runMonurlSync
+}

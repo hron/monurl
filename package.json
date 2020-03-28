@@ -8,12 +8,20 @@
   "scripts": {
     "test": "jest --watchAll"
   },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/", "src/__tests__/runMonurl.js"
+    ]
+  },
   "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "@types/yargs": "^15.0.4",
     "execa": "latest",
     "jest": "^25.2.2",
     "strip-ansi": "latest"
   },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "yargs": "latest"
   }
 }
