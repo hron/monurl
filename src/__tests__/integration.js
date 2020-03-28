@@ -15,5 +15,5 @@ test('starts checks and logs progress', async () => {
   expect(result.stderr).toEqual('')
   expect(result.stdout).toMatch('Starting monitoring')
   expect(result.stdout).toMatch('Check for https://example.com (match text on page) started')
-  expect(result.stdout).toMatch('Check for https://example.com (match text on page) finished. Result: OK; 253 ms')
+  expect(result.stdout).toMatch(/Check for https:\/\/example.com \(match text on page\) finished. Result: OK; \d+ ms/)
 })
