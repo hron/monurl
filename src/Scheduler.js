@@ -6,10 +6,12 @@ class Scheduler {
   }
 
   runOnce() {
+    this._report('schedulerStared')
     this._config.sites.forEach(s => {
+      this._report('checkStarted', s)
       buildCheck(s.type, s.url, s.options)
         .run()
-        .then(checkResult => this._report('checkResult', checkResult))
+        .then(checkResult => this._report('checkFinished', checkResult))
     })
   }
 

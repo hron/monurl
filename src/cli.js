@@ -1,5 +1,6 @@
 const Scheduler = require('./Scheduler.js')
 const Config = require('./Config.js')
+const TextLogReporter = require('./reporters/TextLogReporter')
 
 const argv = require('yargs')
   .option('once', {
@@ -17,6 +18,7 @@ const argv = require('yargs')
 
 const run = () => {
   const config = new Config()
+  config.reporters.push(new TextLogReporter())
   const scheduler = new Scheduler(config)
 
   if (argv.once) {

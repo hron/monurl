@@ -10,11 +10,13 @@
   },
   "jest": {
     "testPathIgnorePatterns": [
-      "/node_modules/", "src/__tests__/runMonurl.js"
+      "/node_modules/",
+      "src/__tests__/runMonurl.js"
     ]
   },
   "devDependencies": {
     "@types/jest": "^25.1.4",
+    "@types/pino": "^5.17.0",
     "@types/yargs": "^15.0.4",
     "execa": "latest",
     "jest": "^25.2.2",
@@ -22,6 +24,8 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "pino": "^6.0.0",
+    "pino-pretty": "^3.6.1",
     "yargs": "latest"
   }
 }
