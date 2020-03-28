@@ -16,12 +16,19 @@ const argv = require('yargs')
     required: true,
     description: 'Path to configuration'
   })
+  .option('periodicity', {
+    alias: 'p',
+    type: 'number',
+    default: 1,
+    description: 'Number of seconds between checks'
+  })
   .argv
 
 const run = () => {
   const config = new Config()
   config.reporters.push(new TextLogReporter())
 
+  if (argv.periodicity) config.periodicity = argv.periodicity
   if (argv.config) config.merge(JSON.parse(fs.readFileSync(argv.config).toString()))
 
   const scheduler = new Scheduler(config)
