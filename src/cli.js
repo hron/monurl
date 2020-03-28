@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 const Scheduler = require('./Scheduler.js')
 const Config = require('./Config.js')
 const TextLogReporter = require('./reporters/TextLogReporter')
@@ -11,7 +13,7 @@ const argv = require('yargs')
   .option('config', {
     alias: 'c',
     type: 'string',
-    default: 'monurl.json',
+    required: true,
     description: 'Path to configuration'
   })
   .argv
@@ -19,6 +21,9 @@ const argv = require('yargs')
 const run = () => {
   const config = new Config()
   config.reporters.push(new TextLogReporter())
+
+  if (argv.config) config.merge(JSON.parse(fs.readFileSync(argv.config).toString()))
+
   const scheduler = new Scheduler(config)
 
   if (argv.once) {

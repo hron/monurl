@@ -1,3 +1,5 @@
+const os = require('os')
+const fs = require('fs')
 const path = require('path')
 const {Writable} = require('stream')
 const execa = require('execa')
@@ -107,7 +109,15 @@ function runMonurl(dir, args, options = {}) {
   }
 }
 
+function writeMonurlConfig(config) {
+  const configPath = path.join(fs.mkdtempSync(`${os.tmpDir}${path.sep}`), 'monurl.json')
+  fs.writeFileSync(configPath, JSON.stringify(config))
+  return configPath
+}
+
+
 module.exports = {
   runMonurl,
-  runMonurlSync
+  runMonurlSync,
+  writeMonurlConfig
 }

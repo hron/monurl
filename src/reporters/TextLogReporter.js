@@ -1,7 +1,8 @@
+const {format} = require('util')
 const pino = require('pino')
 
-const humanizedMessages = {
-  'schedulerStared': 'Starting monitoring'
+const humanizedCheckType = {
+  'containsText': 'match text on page'
 }
 
 class TextLogReporter {
@@ -10,11 +11,34 @@ class TextLogReporter {
   }
 
   process(eventType, payload) {
-    this.logger.info(this.message(eventType), payload)
+    this.logger.info(this._message(eventType, payload))
   }
 
-  message(eventType) {
-    return humanizedMessages[eventType] || eventType
+  _message(eventType, payload) {
+    switch (eventType) {
+      case 'checkStarted':
+        return this._checkStartedMessage(payload)
+      case 'schedulerStarted':
+        return 'Starting monitoring'
+      case 'checkFinished':
+        return this._checkFinishedMessage(payload)
+      default:
+        return [eventType, JSON.stringify(payload)].join('; ')
+    }
+  }
+
+  _checkStartedMessage(site) {
+    return format('Check for %s (%s) started', site.url, humanizedCheckType[site.type])
+  }
+
+  _checkFinishedMessage(checkResult) {
+    return format(
+      'Check for %s (%s) finished. Result: %s; %s',
+      checkResult.site.url,
+      humanizedCheckType[checkResult.site.type],
+      checkResult.success ? 'OK' : 'FAIL',
+      checkResult.additional
+    )
   }
 }
 
