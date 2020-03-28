@@ -1,3 +1,5 @@
+const path = require('path')
+const fs = require('fs')
 const {runMonurlSync, writeMonurlConfig} = require('./runMonurl')
 
 it('starts checks and logs progress', async () => {
@@ -27,3 +29,16 @@ it('starts checks and logs progress', async () => {
   )
 })
 
+it('supports --logfile option', () => {
+  const configPath = writeMonurlConfig({sites: []})
+  const logfilePath = path.join(path.dirname(configPath), 'monurl.log')
+
+  const result = runMonurlSync('..', [
+    `--logfile=${logfilePath}`,
+    '--once',
+    `--config=${configPath}`]
+  )
+  expect(result.stderr).toEqual('')
+
+  expect(fs.readFileSync(logfilePath).toString()).toContain('Starting monitoring')
+})

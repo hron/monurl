@@ -6,8 +6,8 @@ const humanizedCheckType = {
 }
 
 class TextLogReporter {
-  constructor() {
-    this.logger = pino({prettyPrint: true})
+  constructor(filePath) {
+    this.logger = pino({prettyPrint: true}, filePath)
   }
 
   process(eventType, payload) {
