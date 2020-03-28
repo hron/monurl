@@ -1,6 +1,6 @@
 const {runMonurlSync, writeMonurlConfig} = require('./runMonurl')
 
-test('starts checks and logs progress', async () => {
+it('starts checks and logs progress', async () => {
   const configPath = writeMonurlConfig({
     sites: [
       {
@@ -26,3 +26,4 @@ test('starts checks and logs progress', async () => {
     /Check for https:\/\/invalid\.domain \(match text on page\) finished. Result: DOWN; N\/A/
   )
 })
+
