@@ -6,7 +6,7 @@ test('starts checks and logs progress', async () => {
       {
         url: 'https://example.com',
         type: 'containsText',
-        options: {text: 'Please login:'}
+        options: {text: 'Example Domain'}
       },
       {
         url: "https://invalid.domain",

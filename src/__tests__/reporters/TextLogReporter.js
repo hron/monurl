@@ -38,7 +38,8 @@ describe('process(checkStarted, payload)', () => {
     reporter.process(
       'checkFinished',
       {
-        site: {url: 'https://example.com', type: 'containsText', options: {text: 'Test'}},
+        url: 'https://example.com',
+        type: 'containsText',
         success: true,
         transportSuccess: true,
         duration: 253
@@ -54,7 +55,8 @@ describe('process(checkStarted, payload)', () => {
     reporter.process(
       'checkFinished',
       {
-        site: {url: 'https://example.com', type: 'containsText', options: {text: 'Test'}},
+        url: 'https://example.com',
+        type: 'containsText',
         success: false,
         transportSuccess: false,
         duration: undefined
@@ -70,7 +72,8 @@ describe('process(checkStarted, payload)', () => {
     reporter.process(
       'checkFinished',
       {
-        site: {url: 'https://example.com', type: 'containsText', options: {text: 'Test'}},
+        url: 'https://example.com',
+        type: 'containsText',
         success: false,
         transportSuccess: true,
         duration: 500
