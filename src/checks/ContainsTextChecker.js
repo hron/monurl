@@ -7,7 +7,7 @@ class ContainsTextChecker {
   }
 
   run() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, _reject) => {
       let requestStartedAt = Date.now()
       axios.get(this._url).then((response) => {
         resolve({
