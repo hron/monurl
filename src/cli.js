@@ -7,13 +7,19 @@ const argv = require('yargs')
     type: 'boolean',
     description: 'Run single check and exit'
   })
+  .option('config', {
+    alias: 'c',
+    type: 'string',
+    default: 'monurl.json',
+    description: 'Path to configuration'
+  })
   .argv
 
 const run = () => {
   const config = new Config()
   const scheduler = new Scheduler(config)
 
-  if (argv.single) {
+  if (argv.once) {
     scheduler.runOnce()
   } else {
     scheduler.runForever()
