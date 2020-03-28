@@ -4,6 +4,11 @@
       "url": "https://example.com",
       "type": "containsText",
       "options": {"text": "Please login:"}
+    },
+    {
+      "url": "https://invalid.domain",
+      "type": "containsText",
+      "options": {"text": "Please login:"}
     }
   ]
 }

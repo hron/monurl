@@ -17,7 +17,7 @@ class ContainsTextChecker {
           duration: Date.now() - requestStartedAt
         })
       }).catch((_error) => {
-        reject({
+        resolve({
           site: {url: this._url, type: 'containsText'},
           success: false,
           transportSuccess: false,
