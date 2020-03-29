@@ -158,3 +158,27 @@ const buildReporter = (type, options) => {
 }
 
 ```
+
+## How to extend the application to support simultaneous monitoring from multiple locations
+
+
+### Design impact
+
+I think it can be achievable with the current design. `BaseCheck` class should be changed to contact the geographically distributed nodes using some kind of API. It will ask a node to perform the HTTP request. The node should measure latency and respond with results which include response status, body, headers and latency. Then `BaseCheck` will run checks as usual, but it will resolve the promise only after receiving responses  from all nodes and running checks for each of them. Then it will build `CheckResult` object which will contain information for all nodes.
+
+The reporters will receive the updated `CheckResult` object with all information available and react accordingly. 
+
+The disadvantage of such kind of approach is that reporters will not receive any information until we contact all nodes. In case this is not the desired behavior we should consider an alternative approach.
+
+The nodes should be a very simple and stupid. They shouldn't know about sites list. Instead they will obey the command and just make HTTP request. This will allow to avoid distributing configuration.
+
+### Security
+
+With this approach the command center doesn't expose any ports / end-points that can be used for an attack. Thus we should consider two vectors of attack:
+
+1. A compromised geographical node
+1. Man in the middle listens for the traffic between the command center and a node
+
+First of all the communication between node and command center should be encrypted. I think https with authentication is good enough.
+
+Also we should pay a close attention to how we process response from the nodes. It is a potential for code/sql injections.  
