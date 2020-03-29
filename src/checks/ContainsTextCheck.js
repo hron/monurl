@@ -19,7 +19,7 @@ class ContainsTextCheck {
           'containsText',
           Date.now() - requestStartedAt
         )
-        result.success = this._containsText(response.data)
+        if (!this._containsText(response.data)) result.status = 'fail'
         resolve(result)
 
       }).catch((_error) => {

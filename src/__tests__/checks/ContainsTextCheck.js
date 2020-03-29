@@ -21,8 +21,7 @@ describe("run()", () => {
 
     const result = await check.run()
 
-    expect(result.success).toBeTruthy()
-    expect(result.transportSuccess).toBeTruthy()
+    expect(result.status).toEqual('success')
   })
 
   it('returns failed CheckResult object when the website is down', async () => {
@@ -31,8 +30,7 @@ describe("run()", () => {
 
     const result = await check.run()
 
-    expect(result.success).toBeFalsy()
-    expect(result.transportSuccess).toBeFalsy()
+    expect(result.status).toEqual('down')
   })
 
   it("returns a failed CheckResult object when text doesn't match", async () => {
@@ -41,7 +39,6 @@ describe("run()", () => {
 
     const result = await check.run()
 
-    expect(result.success).toBeFalsy()
-    expect(result.transportSuccess).toBeTruthy()
+    expect(result.status).toEqual('fail')
   })
 })

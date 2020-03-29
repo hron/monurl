@@ -5,6 +5,12 @@ const humanizedCheckType = {
   'containsText': 'match text on page'
 }
 
+const humanizedResultStatus = {
+  'success': 'OK',
+  'fail': 'FAIL',
+  'down': 'DOWN'
+}
+
 class TextLogReporter {
   constructor(filePath) {
     this.logger = pino({prettyPrint: true}, filePath)
@@ -36,8 +42,8 @@ class TextLogReporter {
       'Check for %s (%s) finished. Result: %s; %s',
       checkResult.url,
       humanizedCheckType[checkResult.type],
-      checkResult.success ? 'OK' : checkResult.transportSuccess ? 'FAIL' : 'DOWN',
-      checkResult.transportSuccess ? `${checkResult.duration} ms` : 'N/A'
+      humanizedResultStatus[checkResult.status],
+      checkResult.status !== 'down' ? `${checkResult.duration} ms` : 'N/A'
     )
   }
 }

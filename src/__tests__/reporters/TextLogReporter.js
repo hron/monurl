@@ -40,8 +40,7 @@ describe('process(checkStarted, payload)', () => {
       {
         url: 'https://example.com',
         type: 'containsText',
-        success: true,
-        transportSuccess: true,
+        status: 'success',
         duration: 253
       }
     )
@@ -57,8 +56,7 @@ describe('process(checkStarted, payload)', () => {
       {
         url: 'https://example.com',
         type: 'containsText',
-        success: false,
-        transportSuccess: false,
+        status: 'down',
         duration: undefined
       }
     )
@@ -74,8 +72,7 @@ describe('process(checkStarted, payload)', () => {
       {
         url: 'https://example.com',
         type: 'containsText',
-        success: false,
-        transportSuccess: true,
+        status: 'fail',
         duration: 500
       }
     )
