@@ -2,6 +2,26 @@
 
 The tool is intended for monitor a list of urls by making HTTP(S) requests to them and run checks. Currently you can check for text on page, but any other checks can be easily added.
 
+## Installation
+
+1. Install Node.js 13+ version. Instructions: https://nodejs.org/en/
+1. Check out the source code: 
+```shell script
+$ git clone git@github.com:hron/monurl.git
+```
+1. Change directory to the source code root:
+```shell script
+$ cd monurl
+```
+1. Install the required npm packages:
+```shell script
+$ npm install
+```  
+1. Run monurl using a sample config (`samples/monurl.json):
+```shell script
+$ bin/monurl -c samples/monurl.json  -p 5
+```
+
 ## Command Line Interface
 
 ```shell script
@@ -14,6 +34,39 @@ Options:
   --periodicity, -p  Number of seconds between checks      [number] [default: 1]
   --logfile, -l      Path to a logfile                                  [string]
 ``` 
+
+# Configuration file
+
+There are two sections in the configuration file: sites and reporters. Also you can specify periodicity of checks here. Command line option (-p) has a priority.
+
+```json
+{
+  "periodicity": "5",
+  "sites": [
+    {
+      "url": "https://example.com",
+      "type": "containsText",
+      "options": {"text": "Example Domain"}
+    },
+    {
+      "url": "https://example.com",
+      "type": "containsText",
+      "options": {"text": "Something that doesn't present on the page"}
+    },
+    {
+      "url": "https://invalid.domain",
+      "type": "containsText",
+      "options": {"text": "Please login:"}
+    }
+  ],
+  "reporters": [
+    {
+      "type": "textLogger",
+      "options": {"filePath": "./monurl.log"}
+    }
+  ]
+}
+```
 
 ## How to add a new check type
 

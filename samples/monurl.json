@@ -1,4 +1,5 @@
 {
+  "periodicity": "7",
   "sites": [
     {
       "url": "https://example.com",
@@ -14,6 +15,12 @@
       "url": "https://invalid.domain",
       "type": "containsText",
       "options": {"text": "Please login:"}
+    }
+  ],
+  "reporters": [
+    {
+      "type": "textLogger",
+      "options": {"filePath": "./monurl.log"}
     }
   ]
 }
