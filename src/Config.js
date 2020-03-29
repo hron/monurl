@@ -9,7 +9,7 @@ class Config {
 
   merge(configObj) {
     if ('sites' in configObj) this.sites = configObj.sites
-    if ('periodicity' in configObj) this.periodicity = configObj.periodicity
+    if ('periodicity' in configObj) this.periodicity = Number.parseInt(configObj.periodicity)
 
     if ('reporters' in configObj) {
       for (let r of configObj['reporters']) {

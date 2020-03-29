@@ -19,7 +19,6 @@ const argv = require('yargs')
   .option('periodicity', {
     alias: 'p',
     type: 'number',
-    default: 1,
     description: 'Number of seconds between checks'
   })
   .option('logfile', {
@@ -31,14 +30,14 @@ const argv = require('yargs')
 
 const run = () => {
   const config = new Config()
-  config.reporters.push(new TextLogReporter())
-  if (argv.logfile) config.reporters.push(new TextLogReporter(argv.logfile))
 
-  if (argv.periodicity) config.periodicity = argv.periodicity
   if (argv.config) config.merge(JSON.parse(fs.readFileSync(argv.config).toString()))
+  if (argv.logfile) config.reporters.push(new TextLogReporter(argv.logfile))
+  if (argv.periodicity) config.periodicity = argv.periodicity
+
+  config.reporters.push(new TextLogReporter())
 
   const scheduler = new Scheduler(config)
-
   if (argv.once) {
     scheduler.runOnce()
   } else {
