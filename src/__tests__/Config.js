@@ -1,4 +1,5 @@
 const Config = require('../Config')
+const EmailReporter = require('../reporters/EmailReporter')
 
 describe('constructor', () => {
   it('sets sites to an empty array', () => {
@@ -38,5 +39,17 @@ describe('merge', () => {
     config.merge({periodicity: 3})
 
     expect(config.periodicity).toEqual(3)
+  })
+
+  it('adds reporters from the configuration', () => {
+    const config = new Config()
+    config.merge({
+      reporters: [
+        {type: 'email', options: {emailAddresses: ['admin@example.com']}},
+      ]
+    })
+
+    expect(config.reporters).toHaveLength(1)
+    expect(config.reporters[0]).toBeInstanceOf(EmailReporter)
   })
 })

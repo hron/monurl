@@ -42,7 +42,7 @@ class TextLogReporter {
     return format(
       'Check for %s (%s) finished. Result: %s; %s',
       checkResult.url,
-      humanizedCheckType[checkResult.type],
+      humanizedCheckType[checkResult.type] || checkResult.type,
       humanizedResultStatus[checkResult.status],
       checkResult.status !== 'down' ? `${checkResult.duration} ms` : 'N/A'
     )

@@ -60,3 +60,25 @@ it('supports checksum check', () => {
   expect(result.stdout).toMatch('Check for https://example.com (checksum) started')
   expect(result.stdout).toMatch(/Check for https:\/\/example\.com \(checksum\) finished. Result: OK; \d+ ms/)
 })
+
+it('supports email reporter', () => {
+  const configPath = writeMonurlConfig({
+    sites: [
+      {
+        url: 'https://invalid.domain',
+        type: 'matchesChecksum',
+        options: {checksum: '4a3ce8ee11e091dd7923f4d8c6e5b5e41ec7c047'}
+      }
+    ],
+    reporters: [
+      {
+        type: 'email',
+        options: {emailAddresses: ['admin@example.com']}
+      }
+    ]
+  })
+  const result = runMonurlSync('..', ['--once', `--config=${configPath}`])
+
+  expect(result.stderr).toEqual('')
+  expect(result.stdout).toMatch('Notifying admin@example.com about a down state of https://invalid.domain')
+})
