@@ -13,29 +13,26 @@ class ContainsTextCheck {
       let requestStartedAt = Date.now()
 
       axios.get(this._url).then((response) => {
-        const result = this._buildSuccessfulResult(requestStartedAt)
+
+        const result = CheckResult.buildSuccess(
+          this._url,
+          'containsText',
+          Date.now() - requestStartedAt
+        )
         result.success = this._containsText(response.data)
         resolve(result)
+
       }).catch((_error) => {
-        resolve(this._buildTransportError(requestStartedAt))
+
+        const result = CheckResult.buildTransportError(
+          this._url,
+          'containsText',
+          Date.now() - requestStartedAt
+        )
+        resolve(result)
+
       })
     })
-  }
-
-  _buildTransportError(startedAt) {
-    const result = new CheckResult(this._url, 'containsText')
-    result.success = false
-    result.transportSuccess = false
-    result.duration = Date.now() - startedAt
-    return result
-  }
-
-  _buildSuccessfulResult(startedAt) {
-    const result = new CheckResult(this._url, 'containsText')
-    result.success = true
-    result.transportSuccess = true
-    result.duration = Date.now() - startedAt
-    return result
   }
 
   _containsText(page) {
