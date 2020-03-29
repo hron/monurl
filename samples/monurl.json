@@ -3,7 +3,12 @@
     {
       "url": "https://example.com",
       "type": "containsText",
-      "options": {"text": "Please login:"}
+      "options": {"text": "Example Domain"}
+    },
+    {
+      "url": "https://example.com",
+      "type": "containsText",
+      "options": {"text": "Something that doesn't present on the page"}
     },
     {
       "url": "https://invalid.domain",
