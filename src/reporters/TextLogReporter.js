@@ -2,7 +2,8 @@ const {format} = require('util')
 const pino = require('pino')
 
 const humanizedCheckType = {
-  'containsText': 'match text on page'
+  'containsText': 'match text on page',
+  'matchesChecksum': 'checksum'
 }
 
 const humanizedResultStatus = {

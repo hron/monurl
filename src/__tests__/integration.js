@@ -42,3 +42,21 @@ it('supports --logfile option', () => {
 
   expect(fs.readFileSync(logfilePath).toString()).toContain('Starting monitoring')
 })
+
+it('supports checksum check', () => {
+  const configPath = writeMonurlConfig({
+    sites: [
+      {
+        url: 'https://example.com',
+        type: 'matchesChecksum',
+        options: {checksum: '4a3ce8ee11e091dd7923f4d8c6e5b5e41ec7c047'}
+      }
+    ]
+  })
+  const result = runMonurlSync('..', ['--once', `--config=${configPath}`])
+
+  expect(result.stderr).toEqual('')
+  expect(result.stdout).toMatch('Starting monitoring')
+  expect(result.stdout).toMatch('Check for https://example.com (checksum) started')
+  expect(result.stdout).toMatch(/Check for https:\/\/example\.com \(checksum\) finished. Result: OK; \d+ ms/)
+})

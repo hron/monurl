@@ -1,7 +1,22 @@
-class ChecksumCheck {
+const BaseCheck = require('./BaseCheck')
+const crypto = require('crypto')
+
+class ChecksumCheck extends BaseCheck {
   constructor(url, options) {
-    this._url = url
-    this._checksum = options.checksum
+    super(url)
+    this.type = 'matchesChecksum'
+    this.checksum = options.checksum
+  }
+
+  _isFulfilled(response) {
+    return this._checksum(response.data) === this.checksum
+  }
+
+  _checksum(string) {
+    return crypto
+      .createHash('sha1')
+      .update(string, 'utf8')
+      .digest('hex')
   }
 }
 
